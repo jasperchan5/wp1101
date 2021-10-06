@@ -14,12 +14,12 @@
 </head>
 <body>
   <script src="main.js"></script>
-  <script>loadImage(0)</script>
   <div class="top_section">
     <div class="col-md-12 album_title">Digital Album</div>
 </div>
 <div class="photo_section">
-    <button class="switch_button" onclick="switchPage()"></button>
+    <div class="switch_button_left" onclick="switchPage(0)"></div>
+    <div class="switch_button_right" onclick="switchPage(1)"></div>
     <div class="view_box">
         <img id="large_img" src="starburst.jpg" class="image_fitting">
     </div>
@@ -54,5 +54,10 @@
         </div>
     </div>
 </div>
+<div class="row top_section album_title">
+    <div style="margin: auto;">Page:<span id="nowPage">-999</span>/<span id="totalPage">-999</span></div>
+    <div></div>
+</div>
+<script>getPage();loadImage(0);</script>
 </body>
 </html>
