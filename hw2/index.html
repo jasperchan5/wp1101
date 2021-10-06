@@ -14,40 +14,42 @@
 </head>
 <body>
   <script src="main.js"></script>
+  <script>loadImage(0)</script>
   <div class="top_section">
     <div class="col-md-12 album_title">Digital Album</div>
 </div>
 <div class="photo_section">
+    <button class="switch_button" onclick="switchPage()"></button>
     <div class="view_box">
-        <img src="starburst.jpg" class="image_fitting">
+        <img id="large_img" src="starburst.jpg" class="image_fitting">
     </div>
 </div>
 <div class="row">
     <div class="col-md-3">
         <div class="photo_section_2">
             <div class="view_box_2">
-                <img src="mmo.jfif" class="image_fitting">
+                <img id="small_img0" src="starburst.jpg" onclick="loadImage(0)" class="image_fitting">
             </div>
         </div>
     </div>
     <div class="col-md-3">
         <div class="photo_section_2">
             <div class="view_box_2">
-                <img src="uso.jpg" class="image_fitting">
+                <img id="small_img1" src="uso.jpg" onclick="loadImage(1)" class="image_fitting">
             </div>
         </div>
     </div>
     <div class="col-md-3">
         <div class="photo_section_2">
             <div class="view_box_2">
-                <img src="starburst2.jfif" class="image_fitting">
+                <img id="small_img2" src="starburst2.jfif" onclick="loadImage(2)" class="image_fitting">
             </div>
         </div>
     </div>
     <div class="col-md-3">
         <div class="photo_section_2">
             <div class="view_box_2">
-                <img src="ten.jfif" class="image_fitting">
+                <img id="small_img3" src="ten.jfif" onclick="loadImage(3)" class="image_fitting">
             </div>
         </div>
     </div>
