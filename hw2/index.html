@@ -5,21 +5,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Digital Photo Album</title>
-  <link
-    rel="stylesheet"
-    type="text/css"
-    media="screen"
-    href="styles.css"
-  />
+  <link rel="stylesheet" type="text/css" media="screen" href="styles.css"/>
 </head>
 <body>
   <script src="main.js"></script>
   <div class="top_section">
+    <img src="https://img.icons8.com/cotton/64/000000/menu.png" style="position: absolute;z-index: 10000;" onclick="useMenu()">
+    <div id="menu" class="album_menu">
+        <div class="selection_button"></div>
+        <div class="selection_button"></div>
+        <div class="selection_button"></div>
+    </div>
     <div class="col-md-12 album_title">Digital Album</div>
 </div>
 <div class="photo_section">
-    <div class="switch_button_left" onclick="switchPage(0)"></div>
-    <div class="switch_button_right" onclick="switchPage(1)"></div>
+    <div class="switch_button_left" onclick="switchPage(0)" style="text-align:center">Previous page</div>
+    <div class="switch_button_right" onclick="switchPage(1)" style="text-align:center">Next page</div>
     <div class="view_box">
         <img id="large_img" src="starburst.jpg" class="image_fitting">
     </div>

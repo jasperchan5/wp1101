@@ -62,3 +62,17 @@ var switchPage = function(mode){
         container.src = totalImgArr[nowPage][i];
     }
 }
+
+var menuEnlarged = false
+var useMenu = function(){
+    if(!menuEnlarged){
+        menu.className = "album_menu";
+        menu.className += " menu_enlarge";
+        menuEnlarged = true;
+    } 
+    else{
+        menu.className = "album_menu";
+        menu.className += " menu_shrink";
+        menuEnlarged = false;
+    } 
+}
