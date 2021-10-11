@@ -59,6 +59,22 @@
     width: 101%;
     background: linear-gradient(#b4f0ff75, #0000007e);
 }
+.album_menu{
+    height: 70%;
+    width: 15%;
+    background-color: white;
+    border: solid 3px black;
+    z-index: 9999;
+    position: absolute;
+}
+.selection_button{
+    margin: auto;
+    width: 50%;
+    height: 10%;
+    margin-top: 30%;
+    position: relative;
+    background: linear-gradient(#aceeff,#000000);
+}
 .row {
     --bs-gutter-x: 1.5rem;
     --bs-gutter-y: 0;

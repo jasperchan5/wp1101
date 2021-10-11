@@ -12,15 +12,16 @@
   <div class="top_section">
     <img src="https://img.icons8.com/cotton/64/000000/menu.png" style="position: absolute;z-index: 10000;" onclick="useMenu()">
     <div id="menu" class="album_menu">
-        <div class="selection_button"></div>
-        <div class="selection_button"></div>
-        <div class="selection_button"></div>
+        <div class="selection_button" onclick="switchPage(0)"><div style="text-align: center;font-weight: 600;color: aliceblue;">相簿一</div></div>
+        <div class="selection_button" onclick="switchPage(1)"><div style="text-align: center;font-weight: 600;color: aliceblue;">相簿二</div></div>
+        <div class="selection_button" onclick="switchPage(2)"><div style="text-align: center;font-weight: 600;color: aliceblue;">相簿三</div></div>
+        <div class="selection_button" onclick="switchPage(3)"><div style="text-align: center;font-weight: 600;color: aliceblue;">相簿四</div></div>
     </div>
     <div class="col-md-12 album_title">Digital Album</div>
 </div>
 <div class="photo_section">
-    <div class="switch_button_left" onclick="switchPage(0)" style="text-align:center">Previous page</div>
-    <div class="switch_button_right" onclick="switchPage(1)" style="text-align:center">Next page</div>
+    <div class="switch_button_left" onclick="switchPage(-1)" style="text-align:center">Previous page</div>
+    <div class="switch_button_right" onclick="switchPage(100)" style="text-align:center">Next page</div>
     <div class="view_box">
         <img id="large_img" src="starburst.jpg" class="image_fitting">
     </div>

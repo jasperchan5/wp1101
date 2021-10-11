@@ -32,8 +32,8 @@ var loadImage = function(id){
     }
     
 }
-var switchPage = function(mode){
-    if(mode===1){
+var switchPage = function(input){
+    if(input===100){
         getPage();
         nowPage++;
         if(nowPage >= totalImgArr.length || nowPage < 0){
@@ -45,11 +45,24 @@ var switchPage = function(mode){
             loadImage(0);
         }
     }
-    else if(mode===0){
+    else if(input===-1){
         getPage();
         nowPage--;
         if(nowPage >= totalImgArr.length || nowPage < 0){
             nowPage++;
+            alert("Null album");
+        }
+        else{
+            getPage();
+            loadImage(0);
+        }
+    }
+    else{
+        getPage()
+        var temp = nowPage
+        nowPage = input
+        if(nowPage >= totalImgArr.length){
+            nowPage = temp;
             alert("Null album");
         }
         else{
