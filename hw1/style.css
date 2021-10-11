@@ -75,6 +75,15 @@
     position: relative;
     background: linear-gradient(#aceeff,#000000);
 }
+@media(max-width:500px){
+    .selection_button{
+        width: 80%;
+        height: 10%;
+        margin-top: 80%;
+        position: relative;
+        background: linear-gradient(#aceeff,#000000);
+    }
+}
 .row {
     --bs-gutter-x: 1.5rem;
     --bs-gutter-y: 0;
