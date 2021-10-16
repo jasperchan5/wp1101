@@ -88,6 +88,9 @@
     border: solid 0px black;
     z-index: 9999;
     position: absolute;
+    flex-direction: column;
+    display: flex;
+    overflow-y: auto;
 }
 .menu_shrink{
     animation-name: shrink;
@@ -101,7 +104,7 @@
 }
 .selection_button{
     margin: auto;
-    width: 50%;
+    width: 100%;
     height: 10%;
     margin-top: 30%;
     position: relative;

@@ -16,6 +16,8 @@
         <div class="selection_button" onclick="switchPage(1)"><div style="text-align: center;font-weight: 600;color: aliceblue;">相簿二</div></div>
         <div class="selection_button" onclick="switchPage(2)"><div style="text-align: center;font-weight: 600;color: aliceblue;">相簿三</div></div>
         <div class="selection_button" onclick="switchPage(3)"><div style="text-align: center;font-weight: 600;color: aliceblue;">相簿四</div></div>
+        <div onclick="addAlbum()">新增相簿</div>
+        <div onclick="removeAlbum()">刪除相簿</div>
     </div>
     <div class="col-md-12 album_title">Digital Album</div>
 </div>
@@ -26,40 +28,47 @@
         <img id="large_img" src="starburst.jpg" class="image_fitting">
     </div>
 </div>
-<div class="row">
-    <div class="col-md-3">
-        <div class="photo_section_2">
-            <div class="view_box_2">
-                <img id="small_img0" src="starburst.jpg" onclick="loadImage(0)" class="image_fitting">
+<section id="previewSection">
+    <div class="row" id="row0" style="overflow-x:hidden; overflow-y: auto;">
+        <div class="col-md-3" style="display: block;">
+            <div class="photo_section_2">
+                <div class="view_box_2">
+                    <img id="small_img0_0" src="starburst.jpg" onclick="loadImage(0);showCurrentPhoto(1);" class="image_fitting">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3" style="display: block;">
+            <div class="photo_section_2">
+                <div class="view_box_2">
+                    <img id="small_img0_1" src="uso.jpg" onclick="loadImage(1);showCurrentPhoto(2);" class="image_fitting">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3" style="display: block;">
+            <div class="photo_section_2">
+                <div class="view_box_2">
+                    <img id="small_img0_2" src="starburst2.jfif" onclick="loadImage(2);showCurrentPhoto(3);" class="image_fitting">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3" style="display: block;">
+            <div class="photo_section_2">
+                <div class="view_box_2">
+                    <img id="small_img0_3" src="ten.jfif" onclick="loadImage(3);showCurrentPhoto(4);" class="image_fitting">
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="photo_section_2">
-            <div class="view_box_2">
-                <img id="small_img1" src="uso.jpg" onclick="loadImage(1)" class="image_fitting">
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="photo_section_2">
-            <div class="view_box_2">
-                <img id="small_img2" src="starburst2.jfif" onclick="loadImage(2)" class="image_fitting">
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="photo_section_2">
-            <div class="view_box_2">
-                <img id="small_img3" src="ten.jfif" onclick="loadImage(3)" class="image_fitting">
-            </div>
-        </div>
-    </div>
+</section>
+<div class="row top_section album_title" style="font-size:1cm;">
+    <div onclick="addPhoto(currentPhotoNum())">新增相片</div>
+    <div style="margin: auto;">Total photo:<span id="totalPhoto">-999</span> / Current photo:<span id="currentPhoto">-999</span> / Current selecting:<span id="currentSelecting">-999</span></div>
+    <div onclick="removePhoto()">刪除相片</div>
 </div>
 <div class="row top_section album_title">
     <div style="margin: auto;">Page:<span id="nowPage">-999</span>/<span id="totalPage">-999</span></div>
     <div></div>
 </div>
-<script>getPage();loadImage(0);</script>
+<script>getPage();loadImage(0);showPhotoNum();showCurrentPhoto(1);</script>
 </body>
 </html>
