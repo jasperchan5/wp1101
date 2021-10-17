@@ -6,7 +6,7 @@ var totalImgArr = [];
 totalImgArr.push(imgArr);
 totalImgArr.push(imgArr2);
 
-var showPhotoNum = function(){
+var showPhotoNum = function(){ // Return total photo amount.
     var box = document.getElementById("totalPhoto")
     var totalPhotoNum = function(){
         var total = 0;
@@ -20,12 +20,12 @@ var showPhotoNum = function(){
     box.innerText = totalImgArr[nowPage].length;
     return totalPhotoNum();
 }
-var currentPhotoNum = function(){
+var currentPhotoNum = function(){ // Return photo amount of current album.
     return totalImgArr[nowPage].length;
 }
-var showCurrentPhoto = function(page){
+var showCurrentSelecting = function(input){
     var box = document.getElementById("currentSelecting");
-    box.innerText = page;
+    box.innerText = input;
 }
 var getPage = function(){
     document.getElementById("nowPage").innerText = nowPage+1;
@@ -43,7 +43,7 @@ var loadImage = function(id){
     imgBox.src = nowImgArr[id];
     
     var container = document.getElementsByClassName("photo_section_2")
-    for(var i =0 ; i < imgArr.length ; i++){
+    for(var i =0 ; i < nowImgArr.length ; i++){
         if(i===id){
             container[i].style.border = "#ffffff 10px dashed" 
         }
@@ -64,7 +64,7 @@ var switchPage = function(input){
             getPage();
             reloadPhoto(nowPage);
             loadImage(0);
-            showCurrentPhoto(1);
+            showCurrentSelecting(1);
             showPhotoNum();
         }
     }
@@ -79,7 +79,7 @@ var switchPage = function(input){
             getPage();
             reloadPhoto(nowPage);
             loadImage(0);
-            showCurrentPhoto(1);
+            showCurrentSelecting(1);
             showPhotoNum();
         }
     }
@@ -95,12 +95,12 @@ var switchPage = function(input){
             getPage();
             reloadPhoto(nowPage);
             loadImage(0);
-            showCurrentPhoto(1);
+            showCurrentSelecting(1);
             showPhotoNum();
         }
     }
     for(var i =0 ; i < totalImgArr[nowPage].length ; i++){
-        var container = document.getElementById('small_img'+ nowPage + "_" + i +'');
+        var container = document.getElementById('small_img'+ i +'');
         container.src = totalImgArr[nowPage][i];
     }
 }
@@ -120,33 +120,36 @@ var addPhoto = function(index){
     var input = prompt("Insert url:","starburst.jpg")
     // Push photo in array
     nowImgArr = totalImgArr[nowPage];
-    var row = document.getElementById("row0");
     nowImgArr.push(input);
-    var col = document.createElement("div");
-    col.style = "display:block;";
-    col.classList += "col-md-3";
-    row.appendChild(col);
-    var newPhotoSec = document.createElement("div");
-    newPhotoSec.classList += "photo_section_2 photo_section_2:hover";
-    col.appendChild(newPhotoSec);
-    var photoBox = document.createElement("div")
-    photoBox.classList += "view_box_2 view_box_2:hover";
-    newPhotoSec.appendChild(photoBox);
-    var newImg = document.createElement("img");
-    newImg.classList += "image_fitting";
-    newImg.id += "small_img"+ nowPage + "_" + (totalImgArr[nowPage].length - 1) +"";
-    newImg.src = input;
-    newImg.onclick = function(){loadImage(index);showCurrentPhoto(index+1);}
-    photoBox.appendChild(newImg);
+    if(index == document.getElementsByClassName("view_box_2").length){
+        var row = document.getElementById("row0");
+        var col = document.createElement("div");
+        col.style = "display:block;";
+        col.classList += "col-md-3";
+        row.appendChild(col);
+        var newPhotoSec = document.createElement("div");
+        newPhotoSec.classList += "photo_section_2 photo_section_2:hover";
+        col.appendChild(newPhotoSec);
+        var photoBox = document.createElement("div")
+        photoBox.classList += "view_box_2 view_box_2:hover";
+        newPhotoSec.appendChild(photoBox);
+        var newImg = document.createElement("img");
+        newImg.classList += "image_fitting";
+        newImg.id += "small_img"+ (showPhotoNum() - 1) +"";
+        newImg.src = input;
+        newImg.onclick = function(){loadImage(index);showCurrentSelecting(index+1);}
+        photoBox.appendChild(newImg);
+    }
+    reloadPhoto(nowPage);
     showPhotoNum();
-    console.log(nowImgArr);
+    // console.log(nowImgArr);
 }
 var reloadPhoto = function(nowPage){
-    for(var i = 0; i<showPhotoNum(); i++){
+    for(var i = 0; i < document.getElementsByClassName("view_box_2").length; i++){
         if(i < totalImgArr[nowPage].length){
             var col = document.getElementsByClassName("col-md-3")[i];
             col.style = "display: block;";
-            var box = document.getElementById("small_img"+ nowPage + "_" + i +"");
+            var box = document.getElementsByTagName("img")[i+2];
             box.src = totalImgArr[nowPage][i];
         }
         else{
@@ -154,14 +157,13 @@ var reloadPhoto = function(nowPage){
             col.style = "display: none;";
         }
     }
-    
 }
 var removeLastFrame = function(){
     var row = document.getElementById("row0");
     var toDelete1 = document.getElementsByClassName("col-md-3")[totalImgArr[nowPage].length];
     var toDelete2 = document.getElementsByClassName("photo_section_2")[totalImgArr[nowPage].length];
     var toDelete3 = document.getElementsByClassName("view_box_2")[totalImgArr[nowPage].length];
-    var imgToDelete = document.getElementById("small_img"+ nowPage + "_" + totalImgArr[nowPage].length +"");
+    var imgToDelete = document.getElementById("small_img"+ totalImgArr[nowPage].length +"");
     toDelete3.removeChild(imgToDelete);
     toDelete2.removeChild(toDelete3);
     toDelete1.removeChild(toDelete2);
@@ -171,14 +173,15 @@ var removePhoto = function(){
     var index = prompt("輸入欲刪除位置(從0開始)");
     var nowImgArr = totalImgArr[nowPage];
     nowImgArr.splice(parseInt(index),1);
-    reloadPhoto();
-    removeLastFrame();
+    reloadPhoto(nowPage);
     showPhotoNum();
 }
 var addAlbum = function(){
     totalImgArr.push([]);
+    getPage();
 }
 var removeAlbum = function(){
     var index = prompt("輸入欲刪除位置(從0開始)");
     totalImgArr.splice(index,1);
+    getPage();
 }

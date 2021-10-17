@@ -80,7 +80,12 @@
     position: absolute;
     display: block;
 }
-
+.text_button{
+    text-align: center;
+}
+.switch_button_left:hover, .switch_button_right, .text_button:hover{
+    cursor: pointer;
+}
 .album_menu{
     height: 0%;
     width: 0%;

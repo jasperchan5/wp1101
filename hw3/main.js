@@ -28,7 +28,6 @@ var viewButtons = document.createElement("ul");
 viewButtons.classList += "todo-app__view-buttons";
 for(var i=0; i<3; i++){
     var button = document.createElement("button");
-    button.classList += "todo-app__buttons";
     if(i === 0) button.innerText = "All";
     else if(i === 1) button.innerText = "Active";
     else button.innerText = "Completed";
@@ -38,7 +37,6 @@ for(var i=0; i<3; i++){
 var clearButton = document.createElement("div");
 clearButton.classList += "todo-app__clean";
 var button = document.createElement("button");
-button.classList += "todo-app__clean";
 button.innerText = "Clear completed";
 clearButton.appendChild(button);
 
@@ -47,12 +45,18 @@ bottomList.appendChild(viewButtons);
 bottomList.appendChild(clearButton);
 
 // Add todo function
-var addTodo = function(itemName){
+var nowTodoCnt = 0;
+var addTodo = function(itemName,nowTodoCnt){
     var newTodo = document.createElement("li");
     newTodo.classList += "todo-app__item";
     // Checkbox
     var checkBox = document.createElement("div");
     checkBox.classList += "todo-app__checkbox";
+    var confirm = document.createElement("label");
+    confirm.id = nowTodoCnt;
+    confirm.onclick = function(){highLight(nowTodoCnt)};
+    nowTodoCnt += 1;
+    checkBox.appendChild(confirm);
     // Item
     var item = document.createElement("h1");
     item.classList += "todo-app__item-detail";
@@ -67,9 +71,26 @@ var addTodo = function(itemName){
     listFrame.appendChild(newTodo);
 }
 
-var itemName = document.getElementsByClassName("todo-app__input")[0].value;
-window.addEventListener("keypress",function(e){
-    if(e === "Enter"){
-        addTodo(itemName);
+document.addEventListener('keypress',function(e){
+    if(e.key === 'Enter'){
+        var itemName = document.getElementsByClassName("todo-app__input")[0].value;
+        if(itemName != ""){
+            addTodo(itemName,nowTodoCnt);
+        }
     }
 })
+
+var highLight = function(id){
+    // if(!taskFinished[id]){
+    var item = document.getElementById(id);
+    console.log(item);
+    item.style.background = "#26ca299b;";
+    taskFinished[id] = true;
+    // }
+    // else{
+    //     var item = document.getElementById(id);
+    //     item.style.background = "rgba(99, 99, 99, 0.698);";
+    //     taskFinished[id] = false;
+    // }
+    
+}
