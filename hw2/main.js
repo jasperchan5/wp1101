@@ -87,7 +87,7 @@ var switchPage = function(input){
         getPage();
         var temp = nowPage;
         nowPage = input;
-        if(nowPage >= totalImgArr.length){
+        if(nowPage > totalImgArr.length){
             nowPage = temp;
             alert("Null album");
         }
@@ -179,9 +179,31 @@ var removePhoto = function(){
 var addAlbum = function(){
     totalImgArr.push([]);
     getPage();
+    var menu = document.getElementById("menu");
+    var nowAlbumNum = document.getElementsByClassName("selection_button text_button").length - 1;
+    if(nowAlbumNum == totalImgArr.length){
+        var newButton = document.createElement("div");
+        newButton.classList += "selection_button text_button";
+        newButton.onclick = function(){switchPage(nowAlbumNum-1)};
+        var newButtonText = document.createElement("div");
+        newButtonText.style = "font-family: 'Noto Sans TC', sans-serif;text-align: center;font-weight: 600;color: aliceblue;font-size: 0.5cm;vertical-align:middle;";
+        newButtonText.innerText = "Album "+ nowAlbumNum +"";
+        newButtonText.id = "albumText"+ nowAlbumNum +""
+        newButton.appendChild(newButtonText);
+        menu.appendChild(newButton);
+    }
 }
 var removeAlbum = function(){
-    var index = prompt("輸入欲刪除位置(從0開始)");
-    totalImgArr.splice(index,1);
+    var menu = document.getElementById("menu");
+    var albumToDelete = document.getElementsByClassName("selection_button text_button")[totalImgArr.length + 1];
+    var textToDelete = document.getElementById("albumText"+ totalImgArr.length +"");
+    albumToDelete.removeChild(textToDelete);
+    menu.removeChild(albumToDelete);
+    totalImgArr.pop();
+    nowPage --;
     getPage();
+    reloadPhoto(totalImgArr.length-1);
+    loadImage(0);
+    showCurrentSelecting(1);
+    showPhotoNum();
 }
