@@ -200,9 +200,9 @@ var removeAlbum = function(){
     albumToDelete.removeChild(textToDelete);
     menu.removeChild(albumToDelete);
     totalImgArr.pop();
-    nowPage --;
+    nowPage = 0;
     getPage();
-    reloadPhoto(totalImgArr.length-1);
+    reloadPhoto(nowPage);
     loadImage(0);
     showCurrentSelecting(1);
     showPhotoNum();
