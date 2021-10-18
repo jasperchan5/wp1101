@@ -11,7 +11,7 @@
 - bootstrap: 處理同橫列內不同css的排列問題，讓四張小圖能獨立顯示在同一列上<br>
 - hover: 滑鼠移至指定目標上會有不同效果<br>
 
-## Used javascript fuctions:<br>
+## Used javascript functions:<br>
 - showPhotoNum(): 顯示及回傳所有相簿之相片總數
 - currentPhotoNum(): 回傳目前相簿內相片數量
 - showCurrentSelecting(): 顯示目前選取第幾張相片
