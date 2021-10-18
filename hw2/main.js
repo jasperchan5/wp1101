@@ -31,10 +31,20 @@ var getPage = function(){
     document.getElementById("nowPage").innerText = nowPage+1;
     document.getElementById("totalPage").innerText = totalImgArr.length;
     if(nowPage===0){
-        document.getElementsByClassName("switch_button_left").style = "background-color: gray";
+        document.getElementsByClassName("switch_button_left")[0].style.backgroundColor = "gray";
+        document.getElementsByClassName("switch_button_right")[0].style.backgroundColor = "white";
     }
-    if(nowPage===totalImgArr.length-1){
-        document.getElementsByClassName("switch_button_right").style = "background-color: gray";
+    else if(nowPage===totalImgArr.length-1){
+        document.getElementsByClassName("switch_button_left")[0].style.backgroundColor = "white";
+        document.getElementsByClassName("switch_button_right")[0].style.backgroundColor = "gray";
+    }
+    else if(totalImgArr.length-1 === 0){
+        document.getElementsByClassName("switch_button_left")[0].style.backgroundColor = "gray";
+        document.getElementsByClassName("switch_button_right")[0].style.backgroundColor = "gray";
+    }
+    else{
+        document.getElementsByClassName("switch_button_left")[0].style.backgroundColor = "white";
+        document.getElementsByClassName("switch_button_right")[0].style.backgroundColor = "white";
     }
 }
 var loadImage = function(id){
@@ -54,7 +64,6 @@ var loadImage = function(id){
 }
 var switchPage = function(input){
     if(input===100){
-        getPage();
         nowPage++;
         if(nowPage >= totalImgArr.length || nowPage < 0){
             nowPage--;
@@ -69,7 +78,6 @@ var switchPage = function(input){
         }
     }
     else if(input===-1){
-        getPage();
         nowPage--;
         if(nowPage >= totalImgArr.length || nowPage < 0){
             nowPage++;
@@ -84,7 +92,6 @@ var switchPage = function(input){
         }
     }
     else{
-        getPage();
         var temp = nowPage;
         nowPage = input;
         if(nowPage > totalImgArr.length){
