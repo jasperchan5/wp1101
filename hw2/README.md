@@ -18,3 +18,9 @@
 - getPage(): 獲取當前頁數
 - loadImage(): 載入大圖，以及顯示選取目前大圖之預覽圖效果
 - switchPage(): 處理任何有關頁數變動的載入事宜
+- useMenu(): 控制相簿選單的放大、縮小
+- addPhoto(): 新增相片
+- reloadPhoto(): 在換頁面之後重整，顯示當前相簿的相片
+- removeLastFrame(), removePhoto(): 移除指定相片
+- addAlbum(): 新增相簿
+- removeAlbum(): 移除最近新增的相簿
