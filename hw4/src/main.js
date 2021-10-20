@@ -1,128 +1,4 @@
-////// Initiation //////
 
-// Adding elements
-var root = document.getElementById("root");
-
-/// Main section
-var mainSec = document.createElement("section");
-mainSec.classList += "todo-app__main";
-root.appendChild(mainSec);
-//// Input Bar
-var inputBar = document.createElement("input");
-inputBar.classList += "todo-app__input";
-mainSec.appendChild(inputBar);
-//// Todo list
-var listFrame = document.createElement("ul");
-listFrame.classList += "todo-app__list";
-listFrame.id = "todo-list";
-mainSec.appendChild(listFrame);
-
-/// Footer section
-var buttonPushed = [false,false,false];
-var bottomList = document.createElement("footer");
-bottomList.classList += "todo-app__footer";
-bottomList.id = "todo-footer";
-root.appendChild(bottomList);
-var totalNum = document.createElement("div");
-totalNum.classList += "todo-app__total";
-totalNum.innerText = "-999 Left";
-var viewButtons = document.createElement("ul");
-viewButtons.classList += "todo-app__view-buttons";
-for(let i=0; i<3; i++){
-    let button = document.createElement("button");
-    button.style = "display: flex;";
-    if(i === 0){
-        button.innerText = "All";
-        button.onclick = function(){
-            if(buttonPushed[0] == false){
-                buttonPushed[0] = true;
-                this.style = "background: #26ca299b;";
-                buttonPushed[1] = false;
-                buttonPushed[2] = false;
-                document.getElementsByTagName("button")[1].style = "display: flex;";
-                document.getElementsByTagName("button")[2].style = "display: flex;";
-                let items = document.getElementsByClassName("todo-app__item");
-                for(let j = 0; j < items.length; j++){
-                    items[j].style.display = "flex";
-                }
-            }
-            else{
-                buttonPushed[0] = false;
-                this.style = "display: flex;";
-            }
-        };
-    }
-    else if(i === 1){
-        button.innerText = "Active";
-        button.onclick = function(){
-            if(buttonPushed[1] == false){
-                buttonPushed[1] = true;
-                this.style = "background: #26ca299b;";
-                buttonPushed[0] = false;
-                buttonPushed[2] = false;
-                document.getElementsByTagName("button")[0].style = "display: flex;";
-                document.getElementsByTagName("button")[2].style = "display: flex;";
-                let items = document.getElementsByClassName("todo-app__item");
-                let status = document.getElementsByTagName("input");
-                for(let j = 0; j < items.length; j++){
-                    if(status[j+1].checked === false){
-                        items[j].style.display = "flex";
-                    }
-                    else{
-                        items[j].style.display = "none";
-                    }
-                }
-            }
-            else{
-                buttonPushed[1] = false;
-                this.style = "display: flex;";
-            }
-        };
-    }
-    else{
-        button.innerText = "Completed";
-        button.onclick = function(){
-            if(buttonPushed[2] == false){
-                buttonPushed[2] = true;
-                this.style = "background: #26ca299b;";
-                buttonPushed[0] = false;
-                buttonPushed[1] = false;
-                document.getElementsByTagName("button")[0].style = "display: flex;";
-                document.getElementsByTagName("button")[1].style = "display: flex;";
-                let items = document.getElementsByClassName("todo-app__item");
-                let status = document.getElementsByTagName("input");
-                for(let j = 0; j < items.length; j++){
-                    if(status[j+1].checked === true){
-                        items[j].style.display = "flex";
-                    }
-                    else{
-                        items[j].style.display = "none";
-                    }
-                }
-            }
-            else{
-                buttonPushed[2] = false;
-                this.style = "display: flex;";
-            }
-        };
-    }
-    viewButtons.appendChild(button);
-}
-
-var clearButton = document.createElement("div");
-clearButton.classList += "todo-app__clean";
-clearButton.style = "visibility: hidden;";
-var button = document.createElement("button");
-button.innerText = "Clear completed";
-button.onclick = function(){clearCompleted();};
-clearButton.appendChild(button);
-
-bottomList.appendChild(totalNum);
-bottomList.appendChild(viewButtons);
-bottomList.appendChild(clearButton);
-bottomList.style.display = "none";
-
-////// Initiation //////
 
 ////// Functions //////
 
@@ -133,7 +9,7 @@ var existTodo = false;
 document.addEventListener('keypress',function(e){
     if(e.key === 'Enter'){
         let itemName = document.getElementsByClassName("todo-app__input")[0].value;
-        if(itemName != ""){
+        if(itemName !== ""){
             addTodo(itemName,itemCnt);
             document.getElementsByClassName("todo-app__input")[0].value = "";
         }
@@ -162,13 +38,14 @@ var addTodo = function(itemName,index){
     item.innerText = itemName;
     // Delete button
     let deleteButton = document.createElement("img");
-    deleteButton.src = "./img/x.png";
+    deleteButton.src = "x.png";
     deleteButton.classList += "todo-app__item-x";
     deleteButton.onclick = function(){deleteToDo(deleteButton);};
 
     newTodo.appendChild(checkBox);
     newTodo.appendChild(item);
     newTodo.appendChild(deleteButton);
+    var listFrame = document.getElementsByTagName("ul")[0];
     listFrame.appendChild(newTodo);
     // Display the footer
     if(existTodo === false){
@@ -196,7 +73,7 @@ var checkButton = function(target){
     else{
         uncompletedTodoCnt ++;
         completedTodoCnt --;
-        if(completedTodoCnt == 0){
+        if(completedTodoCnt === 0){
             document.getElementsByClassName("todo-app__clean")[0].style.visibility = "hidden";
         }
         document.getElementsByClassName("todo-app__total")[0].innerText = ""+ uncompletedTodoCnt +" Left";
@@ -224,7 +101,7 @@ var deleteToDo = function(target){
     else if(completedTodoCnt === 0){
         document.getElementsByClassName("todo-app__clean")[0].style.visibility = "hidden";
     }
-    if(totalTodoCnt == 0){
+    if(totalTodoCnt === 0){
         existTodo = false;
         document.getElementsByTagName("footer")[0].style.display = "none";
     }
@@ -248,4 +125,5 @@ var clearCompleted = function(){
         document.getElementsByTagName("footer")[0].style.display = "none";
     }
 }
+
 ////// Functions //////
