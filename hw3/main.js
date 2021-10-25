@@ -34,7 +34,7 @@ for(let i=0; i<3; i++){
     if(i === 0){
         button.innerText = "All";
         button.onclick = function(){
-            if(buttonPushed[0] == false){
+            if(buttonPushed[0] === false){
                 buttonPushed[0] = true;
                 this.style = "background: #26ca299b;";
                 buttonPushed[1] = false;
@@ -55,7 +55,7 @@ for(let i=0; i<3; i++){
     else if(i === 1){
         button.innerText = "Active";
         button.onclick = function(){
-            if(buttonPushed[1] == false){
+            if(buttonPushed[1] === false){
                 buttonPushed[1] = true;
                 this.style = "background: #26ca299b;";
                 buttonPushed[0] = false;
@@ -82,7 +82,7 @@ for(let i=0; i<3; i++){
     else{
         button.innerText = "Completed";
         button.onclick = function(){
-            if(buttonPushed[2] == false){
+            if(buttonPushed[2] === false){
                 buttonPushed[2] = true;
                 this.style = "background: #26ca299b;";
                 buttonPushed[0] = false;
@@ -133,7 +133,7 @@ var existTodo = false;
 document.addEventListener('keypress',function(e){
     if(e.key === 'Enter'){
         let itemName = document.getElementsByClassName("todo-app__input")[0].value;
-        if(itemName != ""){
+        if(itemName !== ""){
             addTodo(itemName,itemCnt);
             document.getElementsByClassName("todo-app__input")[0].value = "";
         }
@@ -196,7 +196,7 @@ var checkButton = function(target){
     else{
         uncompletedTodoCnt ++;
         completedTodoCnt --;
-        if(completedTodoCnt == 0){
+        if(completedTodoCnt === 0){
             document.getElementsByClassName("todo-app__clean")[0].style.visibility = "hidden";
         }
         document.getElementsByClassName("todo-app__total")[0].innerText = ""+ uncompletedTodoCnt +" Left";
@@ -224,7 +224,7 @@ var deleteToDo = function(target){
     else if(completedTodoCnt === 0){
         document.getElementsByClassName("todo-app__clean")[0].style.visibility = "hidden";
     }
-    if(totalTodoCnt == 0){
+    if(totalTodoCnt === 0){
         existTodo = false;
         document.getElementsByTagName("footer")[0].style.display = "none";
     }
@@ -240,6 +240,7 @@ var clearCompleted = function(){
             toDeleteList[i].style.display = "none";
             completedTodoCnt --;
             totalTodoCnt --;
+            status.checked = false;
         }
     }
     document.getElementsByClassName("todo-app__clean")[0].style.visibility = "hidden";
