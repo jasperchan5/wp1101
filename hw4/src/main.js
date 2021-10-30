@@ -1,3 +1,4 @@
+import React, {Component}from 'react';
 ////// Functions //////
 
 // Add todo function
@@ -19,76 +20,70 @@ export var filters = function(i){
     let button = document.getElementsByTagName("button")[i];
     button.style = "display: flex;";
     if(i === 0){
-        button.onclick = function(){
-            if(buttonPushed[0] === false){
-                buttonPushed[0] = true;
-                button.style.background = "#26ca299b;";
-                buttonPushed[1] = false;
-                buttonPushed[2] = false;
-                document.getElementsByTagName("button")[1].style = "display: flex;";
-                document.getElementsByTagName("button")[2].style = "display: flex;";
-                let items = document.getElementsByClassName("todo-app__item");
-                for(let j = 0; j < items.length; j++){
-                    items[j].style.display = "flex";
-                }
+        if(buttonPushed[0] === false){
+            buttonPushed[0] = true;
+            button.style = "background: #26ca299b;";
+            buttonPushed[1] = false;
+            buttonPushed[2] = false;
+            document.getElementsByTagName("button")[1].style = "display: flex;";
+            document.getElementsByTagName("button")[2].style = "display: flex;";
+            let items = document.getElementsByClassName("todo-app__item");
+            for(let j = 0; j < items.length; j++){
+                items[j].style.display = "flex";
             }
-            else{
-                buttonPushed[0] = false;
-                button.style = "display: flex;";
-            }
-        };
+        }
+        else{
+            buttonPushed[0] = false;
+            button.style = "display: flex;";
+        }
     }
     else if(i === 1){
-        button.onclick = function(){
-            if(buttonPushed[1] === false){
-                buttonPushed[1] = true;
-                button.style.background = "#26ca299b;";
-                buttonPushed[0] = false;
-                buttonPushed[2] = false;
-                document.getElementsByTagName("button")[0].style = "display: flex;";
-                document.getElementsByTagName("button")[2].style = "display: flex;";
-                let items = document.getElementsByClassName("todo-app__item");
-                let status = document.getElementsByTagName("input");
-                for(let j = 0; j < items.length; j++){
-                    if(status[j+1].checked === false){
-                        items[j].style.display = "flex";
-                    }
-                    else{
-                        items[j].style.display = "none";
-                    }
+        if(buttonPushed[1] === false){
+            buttonPushed[1] = true;
+            button.style = "background: #26ca299b;";
+            buttonPushed[0] = false;
+            buttonPushed[2] = false;
+            document.getElementsByTagName("button")[0].style = "display: flex;";
+            document.getElementsByTagName("button")[2].style = "display: flex;";
+            let items = document.getElementsByClassName("todo-app__item");
+            let status = document.getElementsByTagName("input");
+            for(let j = 0; j < items.length; j++){
+                if(status[j+1].checked === false){
+                    items[j].style.display = "flex";
+                }
+                else{
+                    items[j].style.display = "none";
                 }
             }
-            else{
-                buttonPushed[1] = false;
-                button.style = "display: flex;";
-            }
-        };
+        }
+        else{
+            buttonPushed[1] = false;
+            button.style = "display: flex;";
+        }
     }
     else{
-        button.onclick = function(){
-            if(buttonPushed[2] === false){
-                buttonPushed[2] = true;
-                button.style.background = "#26ca299b;";
-                buttonPushed[0] = false;
-                buttonPushed[1] = false;
-                document.getElementsByTagName("button")[0].style = "display: flex;";
-                document.getElementsByTagName("button")[1].style = "display: flex;";
-                let items = document.getElementsByClassName("todo-app__item");
-                let status = document.getElementsByTagName("input");
-                for(let j = 0; j < items.length; j++){
-                    if(status[j+1].checked === true){
-                        items[j].style.display = "flex";
-                    }
-                    else{
-                        items[j].style.display = "none";
-                    }
+        if(buttonPushed[2] === false){
+            buttonPushed[2] = true;
+            button.style = "background: #26ca299b;";
+            buttonPushed[0] = false;
+            buttonPushed[1] = false;
+            document.getElementsByTagName("button")[0].style = "display: flex;";
+            document.getElementsByTagName("button")[1].style = "display: flex;";
+            let items = document.getElementsByClassName("todo-app__item");
+            let status = document.getElementsByTagName("input");
+            for(let j = 0; j < items.length; j++){
+                if(status[j+1].checked === true){
+                    items[j].style.display = "flex";
+                }
+                else{
+                    items[j].style.display = "none";
                 }
             }
-            else{
-                buttonPushed[2] = false;
-                button.style = "display: flex;";
-            }
-        };
+        }
+        else{
+            buttonPushed[2] = false;
+            button.style = "display: flex;";
+        }
     }
 }
 
@@ -132,7 +127,7 @@ var addTodo = function(itemName,index){
     }
     let displayTotal = document.getElementsByClassName("todo-app__total")[0];
     totalTodoCnt ++; // Add one to total todo count
-    itemCnt = totalTodoCnt; // Make a copy of totalTodoCnt
+    itemCnt ++; // Make a copy of totalTodoCnt
     uncompletedTodoCnt = totalTodoCnt - completedTodoCnt; // 預設為未完成等於全部-完成之TODO
     displayTotal.innerText = ""+ uncompletedTodoCnt +" Left";
 }
@@ -172,7 +167,6 @@ var deleteToDo = function(target){
         console.log("Deleting uncompleted")
         uncompletedTodoCnt --;
     }
-    todoSection.removeChild(toDelete);
     if(completedTodoCnt > 0){
         document.getElementsByClassName("todo-app__clean")[0].style.visibility = "visible";
     }
@@ -184,18 +178,19 @@ var deleteToDo = function(target){
         document.getElementsByTagName("footer")[0].style.display = "none";
     }
     document.getElementsByClassName("todo-app__total")[0].innerText = ""+ uncompletedTodoCnt +" Left";
-    toDelete.style.display = "none";
+    toDelete.remove();
 }
 
 export var clearCompleted = function(){
     let toDeleteList = document.getElementsByClassName("todo-app__item");
-    for(let i = 0; i < toDeleteList.length; i++){
+    let temp = toDeleteList;
+    for(let i = 0; i < temp.length; i++){
         let status = toDeleteList[i].getElementsByTagName("input")[0];
         if(status.checked === true){
-            toDeleteList[i].style.display = "none";
+            toDeleteList[i].remove();
+            i --;
             completedTodoCnt --;
             totalTodoCnt --;
-            status.checked = false;
         }
     }
     document.getElementsByClassName("todo-app__clean")[0].style.visibility = "hidden";

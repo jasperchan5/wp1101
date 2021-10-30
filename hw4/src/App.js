@@ -14,11 +14,11 @@ function App() {
         <footer className="todo-app__footer" id="todo-footer" style={{display: 'none'}}> 
             <div className="todo-app__total">-999 Left</div>
             <ul className="todo-app__view-buttons">
-            <button style={{display: 'flex'}} onClick={function(){filters(0);}}>All</button>
-            <button style={{display: 'flex'}} onClick={function(){filters(1);}}>Active</button>
-            <button style={{display: 'flex'}} onClick={function(){filters(2);}}>Completed</button>
+            <button style={{display: 'flex'}} onClick={()=>{filters(0);}}>All</button>
+            <button style={{display: 'flex'}} onClick={()=>{filters(1);}}>Active</button>
+            <button style={{display: 'flex'}} onClick={()=>{filters(2);}}>Completed</button>
             </ul>
-            <div className="todo-app__clean" style={{visibility: 'hidden'}} onClick={function(){clearCompleted();}}>
+            <div className="todo-app__clean" style={{visibility: 'hidden'}} onClick={()=>{clearCompleted();}}>
             <button>Clear completed</button>
             </div>
         </footer>
