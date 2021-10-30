@@ -1,4 +1,3 @@
-import xImage from './image.js'
 ////// Functions //////
 
 // Add todo function
@@ -116,7 +115,7 @@ var addTodo = function(itemName,index){
     item.innerText = itemName;
     // Delete button
     let deleteButton = document.createElement("img");
-    deleteButton.src = {xImage};
+    deleteButton.src = "x.png";
     deleteButton.alt = "X"
     deleteButton.classList += "todo-app__item-x";
     deleteButton.onclick = function(){deleteToDo(deleteButton);};
@@ -196,6 +195,7 @@ export var clearCompleted = function(){
             toDeleteList[i].style.display = "none";
             completedTodoCnt --;
             totalTodoCnt --;
+            status.checked = false;
         }
     }
     document.getElementsByClassName("todo-app__clean")[0].style.visibility = "hidden";
