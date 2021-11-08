@@ -172,7 +172,7 @@ function RenderCalculator () {
             <div className="calculator__button" onClick={()=>{getOperator('÷');}}>÷</div>
           </div>
           <div className="col-md-2">
-            <div className="calculator__button" onClick={()=>{undo()}}><img src="delete-on.png" style={{width: "30px",height: "30px",paddingTop: "15px"}}></img></div>
+            <div className="calculator__button" onClick={()=>{undo()}}><img src="delete0onn.png" style={{width: "30px",height: "30px",paddingTop: "15px"}}></img></div>
           </div>
         </div>
         
