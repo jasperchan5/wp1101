@@ -1,14 +1,24 @@
 html,body{
   background-color: azure;
 }
-.guessGame__title{
+.guessGame__text{
   text-align: center;
   font-family: 'Courier New', Courier, monospace;
+}
+.guessGame__text.title{
   font-size: 1.5cm;
+  line-height: 3cm;
+}
+.guessGame__text.rule{
+  font-size: 0.9cm;
+  line-height: 1.5cm;
+}
+.guessGame__text.status{
+  font-size: 0.7cm;
 }
 .guessGame__startButton{
   margin-left: 40%;
-  margin-top: 200px;
+  margin-top: 100px;
   width: 20%;
   height: 50px;
   font-family: 'Courier New', Courier, monospace;
@@ -42,11 +52,7 @@ html,body{
   width: 10%;
   height: 100px;
 }
-.guessGame__status{
-  text-align: center;
-  font-size: 1cm;
-  font-family: 'Courier New', Courier, monospace;
-}
+
 
 .row {
   --bs-gutter-x: 1.5rem;
