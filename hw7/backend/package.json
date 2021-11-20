@@ -4,8 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "babel": "^6.23.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "expresss": "^0.0.0",
     "nodemon": "^2.0.15"
   },
   "devDependencies": {
@@ -15,11 +17,15 @@
     "@babel/plugin-proposal-class-properties": "^7.16.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.16.0",
     "@babel/plugin-transform-arrow-functions": "^7.16.0",
-    "@babel/preset-env": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "babel-cli": "^6.26.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^27.3.1",
     "dotenv-defaults": "^3.0.0",
-    "mongoose": "^6.0.13"
+    "mongoose": "^6.0.13",
+    "regenerator-runtime": "^0.13.9"
   },
   "scripts": {
-    "server": "nodemon server.js --ext js --exec babel-node"
+    "server": "nodemon src/main.js --ext js --watch src --exec babel-node"
   }
 }

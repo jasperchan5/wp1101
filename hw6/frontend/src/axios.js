@@ -13,7 +13,13 @@ const guess = async (number) =>{
         return msg;
     }
     catch (error){
-        return ""+ number +" is not a valid number";
+        console.log(error);
+        if(error.response.status === 406){
+            return ""+ number +" is not a valid number";
+        }
+        else{
+            return "Server not responding"
+        }
     }
 }
 const restart = async () =>{
