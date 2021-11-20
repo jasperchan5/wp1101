@@ -97,6 +97,9 @@ function App() {
             randNum = comp_number%10 + Math.floor(Math.random()*10)*10;
           }
         }
+        else{
+          randNum = Math.floor(Math.random()*100); // Keep random guessing
+        }
         // console.log(compGuessArr);
         setComNumber(randNum);
         const comp_response = await guess(randNum);
