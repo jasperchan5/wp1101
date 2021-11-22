@@ -12,8 +12,10 @@ router.post('/start',(_, res) =>{
 })
 router.get('/guess',(req,res) =>{
     // Check if there is a string in guess
-    const number = getNumber();
     const guessed = roughScale(req.query.number, 10);
+    const number;
+    if(!number) genNumber();
+    number = getNumber();
     var hasString = false;
     for(let i=0; i<toString(guessed).length; i++){
         if(parseInt(toString(guessed)[i]) === NaN){
@@ -21,21 +23,21 @@ router.get('/guess',(req,res) =>{
             break;
         }
     }
-    let numArr = Array(2), guessArr = Array(2);
+    let numArr = Array(0), guessArr = Array(0);
     if(number < 10){
-        numArr[0] = number;
+        numArr.push(number);
     }
     else{
-        numArr[0] = Math.floor(number/10);
-        numArr[1] = number%10;
+        numArr.push(Math.floor(number/10));
+        numArr.push(number%10);
     }
 
     if(guessed > 0 && guessed < 10){
-        guessArr[0] = guessed;
+        guessArr.push(guessed);
     }
     else if(guessed >= 10 && guessed < 100){
-        guessArr[0] = Math.floor(guessed/10);
-        guessArr[1] = guessed%10;
+        guessArr.push(Math.floor(guessed/10));
+        guessArr.push(guessed%10);
     }
 
     // // AB game
@@ -53,7 +55,7 @@ router.get('/guess',(req,res) =>{
         else if((guessArr[0] === numArr[0]) && number !== guessed){
             B_cnt++;
         }
-        res.status(200).send({msg: ''+ A_cnt +'A'+ B_cnt +'B'});
+        res.status(200).send({msg: ''+ A_cnt +'A'+ B_cnt +'B '+number+''});
     }
     else if(10 <= guessed && guessed <= 100){
         if(number === guessed){
@@ -68,7 +70,7 @@ router.get('/guess',(req,res) =>{
                 B_cnt++;
             }
         }
-        res.status(200).send({msg: ''+ A_cnt +'A'+ B_cnt +'B'});
+        res.status(200).send({msg: ''+ A_cnt +'A'+ B_cnt +'B '+number+''});
     }
     
 

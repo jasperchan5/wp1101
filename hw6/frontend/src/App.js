@@ -53,7 +53,7 @@ function App() {
         if(comp_status === '0A0B' || comp_status === ''){
          randNum = Math.floor(Math.random()*100); // Keep random guessing
         }
-        else if(comp_status === '0A2B'){
+        else if(status === '0A2B' || comp_status === '0A2B'){
           randNum = comp_number%10*10 + Math.floor(comp_number/10); // Swap two digits
         }
         else if(comp_status === '1A0B'){
