@@ -53,7 +53,7 @@ function App() {
         if(comp_status === '0A0B' || comp_status === ''){
          randNum = Math.floor(Math.random()*100); // Keep random guessing
         }
-        else if(status === '0A2B' || comp_status === '0A2B'){
+        else if(comp_status === '0A2B'){
           randNum = comp_number%10*10 + Math.floor(comp_number/10); // Swap two digits
         }
         else if(comp_status === '1A0B'){
@@ -100,6 +100,9 @@ function App() {
         else{
           randNum = Math.floor(Math.random()*100); // Keep random guessing
         }
+        if(randNum === 0){ // If randNum is still 0
+          randNum = Math.floor(Math.random()*100); // Keep random guessing
+        }
         // console.log(compGuessArr);
         setComNumber(randNum);
         const comp_response = await guess(randNum);
@@ -133,7 +136,8 @@ function App() {
 
   const gameMode = 
     <>
-    <div className="guessGame__text title">Guess a number between 1 and 100</div>
+      <div className="guessGame__text title">Guess a number between 1 and 100</div>
+      <div className="guessGame__text status">Note: If the page says HTTP 500 and you restart the yarn server, the backend will produce a new number, that is, the number you need to guess will be changed.</div>
       <div className="row">
         <input className="guessGame__inputBar" onChange={(e)=>{setNumber(e.target.value);setGuessButton(true)}}></input>
         <button className="guessGame__guessButton"

@@ -5,6 +5,9 @@ const genNumber = () => {
 }
 
 const getNumber = () => {
+    if(!randomNumber){
+        genNumber();
+    }
     return randomNumber;
 }
 

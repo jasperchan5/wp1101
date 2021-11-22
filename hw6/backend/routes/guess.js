@@ -2,6 +2,14 @@ import express from 'express'
 import { genNumber, getNumber } from '../core/getNumber.js';
 const router = express.Router();
 function roughScale(x, base) {
+    console.log(x);
+    for(let i=0; i<x.toString().length; i++){
+        console.log(parseInt(x.toString()[i]));
+        if(Number.isNaN(parseInt(x.toString()[i])) === true){
+            console.log("Found string");
+            return 0;
+        }
+    }
     const parsed = parseInt(x, base);
     if (isNaN(parsed)) { return 0; }
     return parsed;
@@ -13,16 +21,7 @@ router.post('/start',(_, res) =>{
 router.get('/guess',(req,res) =>{
     // Check if there is a string in guess
     const guessed = roughScale(req.query.number, 10);
-    const number;
-    if(!number) genNumber();
-    number = getNumber();
-    var hasString = false;
-    for(let i=0; i<toString(guessed).length; i++){
-        if(parseInt(toString(guessed)[i]) === NaN){
-            hasString = true;
-            break;
-        }
-    }
+    const number = getNumber();
     let numArr = Array(0), guessArr = Array(0);
     if(number < 10){
         numArr.push(number);
@@ -42,7 +41,7 @@ router.get('/guess',(req,res) =>{
 
     // // AB game
     let A_cnt = 0, B_cnt = 0;
-    if(!guessed || guessed < 1 || guessed > 100 || hasString === true){
+    if(!guessed || guessed < 1 || guessed > 100){
         res.status(406).send({msg:'Not a legal number'});
     }
     else if(1 <= guessed && guessed < 10){
@@ -55,7 +54,7 @@ router.get('/guess',(req,res) =>{
         else if((guessArr[0] === numArr[0]) && number !== guessed){
             B_cnt++;
         }
-        res.status(200).send({msg: ''+ A_cnt +'A'+ B_cnt +'B '+number+''});
+        res.status(200).send({msg: ''+ A_cnt +'A'+ B_cnt +'B'});
     }
     else if(10 <= guessed && guessed <= 100){
         if(number === guessed){
@@ -70,7 +69,7 @@ router.get('/guess',(req,res) =>{
                 B_cnt++;
             }
         }
-        res.status(200).send({msg: ''+ A_cnt +'A'+ B_cnt +'B '+number+''});
+        res.status(200).send({msg: ''+ A_cnt +'A'+ B_cnt +'B'});
     }
     
 
