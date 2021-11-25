@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 import axios from '../api';
-import { useScoreCard } from '../hooks/useScoreCard';
+import { ScoreCardProvider, useScoreCard } from '../hooks/useScoreCard';
 
 const Wrapper = styled.section`
   display: flex;
@@ -16,12 +16,16 @@ const Wrapper = styled.section`
 `;
 
 const Header = () => {
-  const { addRegularMessage } = useScoreCard();
+  const { addRegularMessage,clearMessage,printMessage } = useScoreCard();
 
   const handleClear = async () => {
+    console.log("Start to clear");
     const {
       data: { message },
     } = await axios.delete('/api/clear-db');
+    printMessage();
+    clearMessage();
+    printMessage();
     addRegularMessage(message);
   };
 

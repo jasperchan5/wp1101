@@ -54,13 +54,13 @@ const Body = () => {
   };
 
   const handleAdd = async () => {
-    const {
+    const { 
       data: { message, card },
-    } = await axios.post('/api/create-card', {
+    } = await axios.post('/api/create-card', { 
       name,
       subject,
-      score,
-    });
+      score
+    }); 
 
     if (!card) addErrorMessage(message);
     else addCardMessage(message);
@@ -77,7 +77,7 @@ const Body = () => {
     });
 
     if (!messages) addErrorMessage(message);
-    else addRegularMessage(...messages);
+    else addRegularMessage(messages); // 原本是...messages
   };
 
   return (
