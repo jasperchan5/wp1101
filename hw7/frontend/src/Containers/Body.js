@@ -77,7 +77,7 @@ const Body = () => {
     });
 
     if (!messages) addErrorMessage(message);
-    else addRegularMessage(messages); // 原本是...messages
+    else addRegularMessage(...messages);
   };
 
   return (

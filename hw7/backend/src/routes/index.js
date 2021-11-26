@@ -25,24 +25,35 @@ router.post('/',async(req,res) => {
 router.get('/',async(req,res) => {
     try{
         const queryType = req.query.type, queryString = req.query.queryString;
-        console.log(queryType);
+        console.log(queryType,queryString);
+        var msgList = [];
         if(queryType === "name"){
-            console.log("Searching in name");
-            existing = await Student.find({queryString});
+            // console.log("Searching in name");
+            var existing = await Student.find({}).exec();
+            for(let i=0; i<existing.length; i++){
+                if(existing[i].name === queryString){
+                    msgList.push("Name: "+ existing[i].name +" Subject: "+ existing[i].subject +" Score: "+ existing[i].score +"");
+                }
+            }
         }
         else if(queryType === "subject"){
-            console.log("Searching in subject");
-            existing = await Student.find({queryString});
+            // console.log("Searching in subject");
+            var existing = await Student.find({}).exec();
+            for(let i=0; i<existing.length; i++){
+                if(existing[i].subject === queryString){
+                    msgList.push("Name: "+ existing[i].name +" Subject: "+ existing[i].subject +" Score: "+ existing[i].score +"");
+                }
+            }
         }
+        if(msgList.length === 0) existing = null;
         const exist = existing?true:false;
-        console.log(exist);
         if(exist){
-            // console.log(queryType,queryString," found!");
-            res.status(200).send({messages: "- Name:"+ queryType +"("+ queryString +") found!",message: "Query error"});
+            res.status(200).send({messages: msgList,message: "Query error"});
         }
         else{
+            msgList.push(""+ queryType +"("+ queryString +") not found!");
             // console.log(queryType,queryString," not found!");
-            res.status(200).send({messages: "- "+ queryType +"("+ queryString +") not found!",message: "Query error"});
+            res.status(200).send({messages: msgList,message: "Query error"});
         }
     }
     catch(error){

@@ -48,7 +48,7 @@ const saveStudent = async(name,subject,score) => {
     else{
         try{
             const newStudent = new Student({name,subject,score});
-            console.log("Adding ",{name,subject,score});
+            // console.log("Adding ",{name,subject,score});
             newStudent.save();
             return "Add";
         }
@@ -61,7 +61,7 @@ const saveStudent = async(name,subject,score) => {
 const deleteDB = async () => {
     try{
         await Student.deleteMany({});
-        console.log("Database deleted");
+        // console.log("Database deleted");
     }
     catch(e){
         throw new Error("Database deletion failed");
