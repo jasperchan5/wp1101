@@ -31,14 +31,14 @@ mongoose.connect(
 
 var exist = false;
 const saveStudent = async(name,subject,score) => {
-    const existing = await Student.findOne({name,subject});
+    // console.log("Start searching");
+    const existing = await Student.findOne({name,subject}).exec();
+    // console.log("End searching");
     exist = existing?true:false;
-    if(existing){
+    if(exist){
         try{
-            Student.deleteOne({name,subject});
-            const newStudent = Student({name,subject,score});
-            console.log("Updating ",newStudent);
-            newStudent.save();
+            Student.findOneAndUpdate({name,subject},{score:score},{new:true}).exec();
+            console.log("Updating ",{name,subject,score});
             return "Update";
         }
         catch(e){
@@ -48,7 +48,7 @@ const saveStudent = async(name,subject,score) => {
     else{
         try{
             const newStudent = new Student({name,subject,score});
-            console.log("Adding ",newStudent);
+            console.log("Adding ",{name,subject,score});
             newStudent.save();
             return "Add";
         }
