@@ -1,10 +1,10 @@
-import WebSocket from 'ws';
+import {WebSocketServer} from 'ws';
 import mongoose from 'mongoose';
 import http from 'http';
 import dotenv from 'dotenv-defaults';
 import express from 'express';
 import Message from './models/messages.js'
-import { sendStatus } from './wssConnect.js';
+import { sendStatus,initData, sendData } from './wssConnect.js';
 
 dotenv.config();
 const url = process.env.MONGO_URL;
@@ -13,13 +13,21 @@ mongoose.connect(url, {
     useUnifiedTopology: true,
 })
 .then(() => console.log("mongo db connection created"));
+
 const app = express();
 const server = http.createServer(app);
-const wss = new WebSocket.Server({server});
-
+const wss = new WebSocketServer({server});
+// Broadcast function
+const broadcastMessage = (data, status) => { // How to modify wss.on?
+    wss.clients.forEach((client) => {
+        sendData(data, client);
+        sendStatus(status, client);
+    })
+}
 const db = mongoose.connection;
 db.once('open',() => {
     wss.on('connection', (ws) => {
+        initData(ws);
         ws.onmessage = async (byteString) => {
             const {data} = byteString;
             const [task, payload] = JSON.parse(data);
@@ -41,8 +49,14 @@ db.once('open',() => {
                     }, ws);
                     break;
                 }
+                case 'clear':{
+                    Message.deleteMany({},() => {
+                        sendData(['cleared']);
+                        sendStatus({ type: 'info', msg: 'Message cache cleared'});
+                    })
+                }
+                default: break;
             }
-            await Message.save(); 
         }
         sendData(['output',[payload]])
     })
