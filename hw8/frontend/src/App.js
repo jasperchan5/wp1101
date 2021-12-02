@@ -1,7 +1,7 @@
 import './App.css'
 import { Button, Input, message, Tag } from 'antd'
 import useChat from './useChat';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 function App() {
   // Define states and methods
