@@ -5,7 +5,7 @@ import { useRef, useState, useEffect } from 'react';
 
 function App() {
   // Define states and methods
-  const {status, messages, sendMessage,clearMessages} = useChat();
+  const {status, messages, sendMessage, clearMessages} = useChat();
   const [userName,setUserName] = useState('');
   const [body,setBody] = useState('') // Text body
   const displayStatus = (payload) => {

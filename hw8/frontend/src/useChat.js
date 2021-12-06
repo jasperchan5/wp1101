@@ -34,15 +34,18 @@ const useChat = () => {
     }
   };
 
-  const sendData = async (data) => {
-    await client.send(JSON.stringify(data));
-  };
 
   const clearMessages = () => {
     sendData(["clear"]);
   };
 
-  const sendMessage = (payload) => { sendData(["input", payload]); }
+  const sendMessage = (payload) => { 
+    sendData(["input", payload]); 
+  };
+
+  const sendData = async (data) => {
+    await client.send(JSON.stringify(data));
+  };
 
   return {
     status,

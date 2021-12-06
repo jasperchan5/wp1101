@@ -4,7 +4,7 @@ import http from 'http';
 import dotenv from 'dotenv-defaults';
 import express from 'express';
 import Message from './models/messages.js'
-import { sendStatus,initData, sendData } from './wssConnect.js';
+import { sendStatus, initData, sendData } from './wssConnect.js';
 
 dotenv.config();
 const url = process.env.MONGO_URL;
@@ -42,23 +42,24 @@ db.once('open',() => {
                     catch(e){
                         throw new Error("Message DB save error: " + e);
                     }
-                    sendData(["output", [payload]]);
-                    sendStatus({
+                    broadcastMessage(["output", [payload]],{
                         type: 'success',
                         msg: 'Message sent.'
-                    }, ws);
+                    });
                     break;
                 }
                 case 'clear':{
                     Message.deleteMany({},() => {
-                        sendData(['cleared']);
-                        sendStatus({ type: 'info', msg: 'Message cache cleared'});
+                        broadcastMessage(['cleared'],{ 
+                            type: 'info', 
+                            msg: 'Message cache cleared'
+                        });
                     })
                 }
                 default: break;
             }
         }
-        sendData(['output',[payload]])
+        // sendData(['output',[payload]])
     })
     const PORT = process.env.port || 4000;
     server.listen(PORT, () => {
