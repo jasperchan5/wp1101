@@ -14,11 +14,11 @@ router.get('/api/allPosts',async(_,res) => {
             res.status(200).send({message: "success",data: postList});
         }
         else{
-            res.status(403).send({msg: "error",data: null});
+            res.status(403).send({message: "error",data: null});
         }
     }
     catch{
-        res.status(403).send({msg: "error",data: null});
+        res.status(403).send({message: "error",data: null});
     }
     
     
