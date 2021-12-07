@@ -1,19 +1,26 @@
-import express from 'express'
+import express, { Router } from 'express'
 import Post from '../models/post.js'
 import moment from 'moment'
+
 
 const router = express.Router()
 
 // TODO 2-(1): create the 1st API (/api/allPosts)
-router.get('/api/allPosts',async(req,res) => {
-    const postList = Post.find({}).sort('timestamp').exec()
-    console.log(postList);
-    if(postList.length > 0){
-        res.status(200).send({msg: "success",postList: postList});
+router.get('/api/allPosts',async(_,res) => {
+    console.log("bbb");
+    try{
+        const postList = await Post.find({}).sort('timestamp').exec()
+        if(postList.length > 0){
+            res.status(200).send({message: "success",data: postList});
+        }
+        else{
+            res.status(403).send({msg: "error",postList: null});
+        }
     }
-    else{
+    catch{
         res.status(403).send({msg: "error",postList: null});
     }
+    
     
 })
 // TODO 3-(1): create the 2nd API (/api/postDetail)
@@ -27,7 +34,13 @@ router.get('/api/postDetail',async(req,res) => {
     }
 })
 // TODO 4-(1): create the 3rd API (/api/newPost)
-
+router.post('/api/newPost',(req,res) => {
+    const postId = req.body.postId, title = req.body.title
+})
 // TODO 5-(1): create the 4th API (/api/post)
+router.delete('/api/post', (req,res) => {
+    Post.deleteOne({id:req.query.pid})
+    res.status(200).send({message: "success"})
+})
 
 export default router

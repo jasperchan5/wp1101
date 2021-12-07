@@ -8,15 +8,20 @@ function Board(props) {
   const [posts, setPosts] = useState([])
   
   // TODO 2-(2): fetch all posts from database
-  useEffect(async() => {
-    try{
-      const {data:{msg,postList}} = await instance.get('/allPosts')
-      return postList;
+  useEffect(() => {
+    const someFunc = async () => {
+      console.log("aaa");
+      try{
+        const {data:{message,data}} = await instance.get('allPosts',{
+          params:{}
+        })
+        setPosts(data)
+      }
+      catch(e){
+        console.log(e)
+      }
     }
-    catch(e){
-      return "Fetch not success"
-    }
-
+    someFunc()
   }, [])
   
   return (

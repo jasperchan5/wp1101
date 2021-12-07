@@ -14,7 +14,7 @@ function Post(props) {
   const getPostDetail = async() => {
     const post = await instance.get('/postDetail',{
       params: {
-        pid: pid
+        pid
       }
     })
     setData(post)
