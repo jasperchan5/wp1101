@@ -12,7 +12,9 @@ function Board(props) {
     const someFunc = async () => {
       console.log("aaa");
       try{
-        const {data:{message,data}} = await instance.get('allPosts',{
+        const {
+          data: { message, data},
+        } = await instance.get('/allPosts', {
           params:{}
         })
         setPosts(data)
