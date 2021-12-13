@@ -9,7 +9,7 @@ function App() {
   const [userName,setUserName] = useState('');
   const [body,setBody] = useState(''); // Text body
   const [login,setLogin] = useState(false);
-  const [me,setMe] = useState('')
+  const [me,setMe] = useState('');
 
   const displayStatus = (payload) => {
     if(payload.msg){
@@ -30,8 +30,13 @@ function App() {
       }
     }
   }
-  useEffect(() => {displayStatus(status)},[status]);
+
+  useEffect(() => {
+    displayStatus(status)
+  },[status]);
+
   const bodyRef = useRef(null);
+  
   if(login){
     return (
       <div className="App">
@@ -86,8 +91,6 @@ function App() {
         </div>
         <div style={{height: "50px"}}></div>
         <Input.Search
-      
-          value={userName}
           enterButton="Sign In"
           placeholder="Enter username"
           onChange={(e) => {
