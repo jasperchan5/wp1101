@@ -6,7 +6,7 @@ import moment from 'moment'
 const router = express.Router()
 
 // TODO 2-(1): create the 1st API (/api/allPosts)
-router.get('/api/allPosts',async(_,res) => {
+router.get('/allPosts',async(_,res) => {
     console.log("bbb");
     try{
         const postList = await Post.find({}).sort('timestamp').exec()

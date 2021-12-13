@@ -3,10 +3,7 @@ import { useState } from "react";
 const client = new WebSocket("ws://localhost:4000");
 
 const useChat = () => {
-  const [messages, setMessages] = useState([
-    { name: "Ric", body: "Hello?" },
-    { name: "Mary", body: "Hi!" },
-  ]);
+  const [messages, setMessages] = useState([]);
   const [status, setStatus] = useState({});
 
   client.onmessage = (byteString) => {
