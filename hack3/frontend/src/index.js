@@ -8,32 +8,33 @@ import {
   ApolloProvider,
   split,
   HttpLink,
+  useReactiveVar,
 } from "@apollo/client";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { WebSocketLink } from "@apollo/client/link/ws";
 
 // TODO 1.2 Connect your GraphQL Server
 const httpLink = new HttpLink({
-  uri: "http://localhost:5000/graphql"
+  uri: 'http://localhost:5000'
 });
 
 const wsLink = new WebSocketLink({
-  uri: "ws://localhost:5000/subscriptions",
+  uri: 'ws://localhost:5000',
   options: {
     reconnect: true
   }
 });
 
 const splitLink = split(
-  ({query}) => {
+  ({ query }) => {
     const definition = getMainDefinition(query);
-    return(
+    return (
       definition.kind === 'OperationDefinition' &&
       definition.operation === 'subscription'
     );
   },
   wsLink,
-  httpLink
+  httpLink,
 );
 
 const client = new ApolloClient({
