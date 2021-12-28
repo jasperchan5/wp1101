@@ -31,14 +31,14 @@ const example = [
   },
   {
     id: "3",
-    title: "This is task3",
+    title: "This is task333",
     content: "This is the task's content",
     status: "DONE",
     dueDate: new Date("2021-12-01T03:32:10.360Z").getTime(),
   },
   {
     id: "6",
-    title: "This is task6",
+    title: "This is task666",
     content: "This is the task's content",
     status: "DONE",
     dueDate: new Date("2021-12-01T03:32:10.360Z").getTime(),
@@ -47,7 +47,7 @@ const example = [
 
 const dataInit = async () => {
   const checkData = await taskModel.find();
-  if (checkData.length !== 6 && process.env.EXAM === "true") {
+  if (process.env.EXAM === "true") {
     await taskModel.deleteMany({});
     await taskModel.insertMany(example);
     console.log("Database initialized!");

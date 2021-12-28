@@ -14,15 +14,15 @@ import { WebSocketLink } from "@apollo/client/link/ws";
 
 // TODO 1.2 Connect your GraphQL Server
 const httpLink = new HttpLink({
-  uri: "http://localhost:4000/graphql"
+  uri: "http://localhost:5000/graphql"
 });
 
 const wsLink = new WebSocketLink({
-  uri: "ws://localhost:4000/subscriptions",
+  uri: "ws://localhost:5000/subscriptions",
   options: {
     reconnect: true
   }
-})
+});
 
 const splitLink = split(
   ({query}) => {
@@ -33,12 +33,12 @@ const splitLink = split(
     );
   },
   wsLink,
-  httpLink,
+  httpLink
 );
 
 const client = new ApolloClient({
   link: splitLink, // TODO 1.2 Uncomment this while you finish the splitLink
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache()
 });
 
 ReactDOM.render(
