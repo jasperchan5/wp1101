@@ -14,8 +14,11 @@ export const UPDATE_TASK_MUTATION = gql`
 
 // TODO 4.1 Create Task Mutation.
 // Uncomment the following lines and fill the gql part
-// export const CREATE_TASK_MUTATION = gql`
-// `;
+export const CREATE_TASK_MUTATION = gql`
+  mutation CreateTask($input: CreateTaskInput!) {
+    createTask(id: $id)
+  }
+`;
 
 export const DELETE_TASK_MUTATION = gql`
   mutation DeleteTask($id: ID!) {
