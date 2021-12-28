@@ -47,7 +47,7 @@ const example = [
 
 const dataInit = async () => {
   const checkData = await taskModel.find();
-  if (process.env.EXAM === "true") {
+  if (checkData.length !== 6 && process.env.EXAM === "true") {
     await taskModel.deleteMany({});
     await taskModel.insertMany(example);
     console.log("Database initialized!");
