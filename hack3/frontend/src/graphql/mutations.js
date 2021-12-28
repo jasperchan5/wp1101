@@ -16,7 +16,7 @@ export const UPDATE_TASK_MUTATION = gql`
 // Uncomment the following lines and fill the gql part
 export const CREATE_TASK_MUTATION = gql`
   mutation CreateTask($input: CreateTaskInput!) {
-    createTask(input: $CreateTaskInput)
+    createTask(input: $input)
   }
 `;
 
