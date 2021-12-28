@@ -31,14 +31,14 @@ const example = [
   },
   {
     id: "3",
-    title: "This is task333",
+    title: "This is task3",
     content: "This is the task's content",
     status: "DONE",
     dueDate: new Date("2021-12-01T03:32:10.360Z").getTime(),
   },
   {
     id: "6",
-    title: "This is task666",
+    title: "This is task6",
     content: "This is the task's content",
     status: "DONE",
     dueDate: new Date("2021-12-01T03:32:10.360Z").getTime(),
