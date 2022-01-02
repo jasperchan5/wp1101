@@ -15,11 +15,11 @@ import { WebSocketLink } from "apollo-link-ws";
 import { getMainDefinition } from "apollo-utilities";
 
 const httpLink = new HttpLink({
-  uri: "http://loclahost:5000"
+  uri: "http://localhost:5000"
 });
 
 const wsLink = new WebSocketLink({
-  uri: "ws://loclahost:5000"
+  uri: "ws://localhost:5000"
 });
 
 

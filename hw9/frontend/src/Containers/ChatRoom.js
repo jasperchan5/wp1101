@@ -3,7 +3,7 @@ import { Input, Button, Tag, Tabs } from "antd";
 import { useMutation } from '@apollo/client';
 import { CREATE_CHATBOX_MUTATION, CREATE_MESSAGE_MUTATION } from "../graphql";
 import ChatBox from "./ChatBox";
-import ChatModal from "./ChatModal"
+import ChatModal from "./ChatModal";
 import useChatBox from "../Hooks/useChatBox.js";
 import Title from "../Components/Title.js"
 import styled from "styled-components";
@@ -19,7 +19,7 @@ const Wrapper = styled(Tabs)`
     display: flex;
 `;
 
-export default ({ me, messages, displayStatus, clearMessages, userName }) => {
+export default ({ me, displayStatus }) => {
     const [messageInput, setMessageInput] = useState('');
     const [activeKey, setActiveKey] = useState('');
     const { chatBoxes, createChatBox, removeChatBox } = useChatBox();
@@ -36,9 +36,9 @@ export default ({ me, messages, displayStatus, clearMessages, userName }) => {
         <>
                 <Title>
                     <h1>{me}'s Chat Room</h1>
-                    <Button type="primary" danger onClick={clearMessages}>
+                    {/* <Button type="primary" danger onClick={clearMessages}>
                         Clear
-                    </Button>
+                    </Button> */}
                 </Title>
                 <>
                     <Wrapper
@@ -89,13 +89,13 @@ export default ({ me, messages, displayStatus, clearMessages, userName }) => {
                 // When "Send", call sendMessage()
                 onSearch={(msg) => {
                     if(!msg){
-                    displayStatus({
-                        type: 'error',
-                        msg: 'Please enter a message body'
-                    })
-                    return;
+                        displayStatus({
+                            type: 'error',
+                            msg: 'Please enter a message body'
+                        })
+                        return;
                     }
-                    sendMessage({name: userName, body: msg});
+                    sendMessage({ variables: {from: me, to: activeKey, message: msg }});
                     setMessageInput('');
                 }}
                 ></Input.Search>

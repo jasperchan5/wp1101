@@ -12,7 +12,7 @@ function App() {
   const savedMe = localStorage.getItem(LOCALSTORAGE_KEY);
 
   // Define states and methods
-  const {status, messages, sendMessage, clearMessages} = useChat();
+  // const {status, messages, sendMessage, clearMessages} = useChat();
   const [userName,setUserName] = useState('');
   const [body,setBody] = useState(''); // Text body
   const [login,setLogin] = useState(false);
@@ -44,19 +44,21 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    displayStatus(status)
-  },[status]);
+  // useEffect(() => {
+  //   displayStatus(status)
+  // },[status]);
 
-  const bodyRef = useRef(null);
-  
-  return(login
-  ?
-  <ChatRoom me={me} messages={messages}
-    displayStatus={displayStatus} 
-    clearMessages={clearMessages} userName={userName} />
-  :
-  <SignIn setUserName={setUserName} displayStatus={displayStatus} me={me} setMe={setMe} setLogin={setLogin}/>)
+  return(
+    <div className='App'>
+      {
+        login
+        ?
+        <ChatRoom me={me} displayStatus={displayStatus} />
+        :
+        <SignIn setUserName={setUserName} displayStatus={displayStatus} me={me} setMe={setMe} setLogin={setLogin}/>
+      }
+    </div>
+  )
 }
 
 export default App
