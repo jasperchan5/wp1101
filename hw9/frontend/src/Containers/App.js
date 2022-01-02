@@ -52,11 +52,11 @@ function App() {
   
   return(login
   ?
-  <ChatRoom me={me} messages={messages} bodyRef={bodyRef} body={body} 
-    setBody={setBody} displayStatus={displayStatus} sendMessage={sendMessage}
+  <ChatRoom me={me} messages={messages}
+    displayStatus={displayStatus} 
     clearMessages={clearMessages} userName={userName} />
   :
-  <SignIn setUserName={setUserName} displayStatus={displayStatus} setMe={setMe} setLogin={setLogin}/>)
+  <SignIn setUserName={setUserName} displayStatus={displayStatus} me={me} setMe={setMe} setLogin={setLogin}/>)
 }
 
 export default App

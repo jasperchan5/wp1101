@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv-defaults';
 
-
 export default () => {
     dotenv.config();
     const url = process.env.MONGO_URL;

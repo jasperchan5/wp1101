@@ -1,38 +1,90 @@
 import React, { useState } from "react";
-import { Input, Button, Tag } from "antd";
+import { Input, Button, Tag, Tabs } from "antd";
+import { useMutation } from '@apollo/client';
+import { CREATE_CHATBOX_MUTATION, CREATE_MESSAGE_MUTATION } from "../graphql";
+import ChatBox from "./ChatBox";
+import ChatModal from "./ChatModal"
+import useChatBox from "../Hooks/useChatBox.js";
+import Title from "../Components/Title.js"
+import styled from "styled-components";
 import "../App.css"
 
-export default ({ me, messages, bodyRef, body, setBody, displayStatus, sendMessage, clearMessages, userName }) => {
-    
+const Wrapper = styled(Tabs)`
+    width: 100%;
+    height: 300px;
+    background: eeeeee52;
+    border-radius: 10px;
+    margin: 20px;
+    padding: 20px;
+    display: flex;
+`;
+
+export default ({ me, messages, displayStatus, clearMessages, userName }) => {
+    const [messageInput, setMessageInput] = useState('');
+    const [activeKey, setActiveKey] = useState('');
+    const { chatBoxes, createChatBox, removeChatBox } = useChatBox();
+    const [modalVisible, setModalVisible] = useState(false);
+
+    const [startChat] = useMutation(CREATE_CHATBOX_MUTATION);
+    const [sendMessage] = useMutation(CREATE_MESSAGE_MUTATION);
+
+    const addChatBox = () => {
+        setModalVisible(true);
+    }
+
     return(
         <>
-            <div className="App">
-                <div className="App-title">
-                <h1>{me}'s Chat Room</h1>
-                <Button type="primary" danger onClick={clearMessages}>
-                    Clear
-                </Button>
-                </div>
-                <div className="App-messages">
-                {messages.length === 0
-                // Initial or when cleared
-                ?(<p style={{ color: '#ccc' }}>No messages...</p>)
-                // Print each message {name, textBody}
-                :(messages.map(({name,body}, i) => {
-                    return <p key={i}>
-                    <Tag color="blue">{name}</Tag> {body}
-                    </p>
-                }
-                ))}
-                </div>
+                <Title>
+                    <h1>{me}'s Chat Room</h1>
+                    <Button type="primary" danger onClick={clearMessages}>
+                        Clear
+                    </Button>
+                </Title>
+                <>
+                    <Wrapper
+                        tabBarStyle={{height: "36px"}}
+                        type="editable-card"
+                        activeKey={activeKey}
+                        onChange={(key) => {
+                            setActiveKey(key);
+                        }}
+                        onEdit={(targetKey, action) => {
+                            if(action === "add") addChatBox();
+                            else if(action === "remove"){
+                                setActiveKey(removeChatBox(targetKey,activeKey));
+                            }
+                        }}
+                    >
+                        {chatBoxes.map((friend) => {
+                            <Tabs.TabPane tab = {friend} closable={true} key={friend}>
+                                <ChatBox me={me} friend={friend} key={friend}></ChatBox>
+                            </Tabs.TabPane>
+                        })}
+                    </Wrapper>
+                    <ChatModal
+                    visible={modalVisible}
+                    onCreate={async({ name, friend }) => {
+                        await startChat({
+                            variables: {
+                                name1: me,
+                                name2: friend
+                            },
+                        })
+
+                        setActiveKey(createChatBox(name));
+                        setModalVisible(false);
+                    }}
+                    onCancel={() => {
+                        setModalVisible(false);
+                    }}
+                ></ChatModal>
+                </> 
                 <Input.Search
-                // Set ref
-                ref={bodyRef}
                 // Save and store the text body
-                value={body}
-                onChange={(e) => {setBody(e.target.value)}}
+                value={messageInput}
+                onChange={(e) => {setMessageInput(e.target.value)}}
                 enterButton="Send"
-                placeholder="Type a message here..."
+                placeholder="Enter message here..."
                 
                 // When "Send", call sendMessage()
                 onSearch={(msg) => {
@@ -44,10 +96,9 @@ export default ({ me, messages, bodyRef, body, setBody, displayStatus, sendMessa
                     return;
                     }
                     sendMessage({name: userName, body: msg});
-                    setBody('');
+                    setMessageInput('');
                 }}
                 ></Input.Search>
-            </div>
         </>
     )
 }

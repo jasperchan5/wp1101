@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Input } from "antd";
 import "../App.css"
 
-export default ({ setUserName, displayStatus, setMe, setLogin }) => {
+export default ({ setUserName, displayStatus, me, setMe, setLogin }) => {
     return(
     <>
     <div className='App'>
@@ -13,8 +13,9 @@ export default ({ setUserName, displayStatus, setMe, setLogin }) => {
         <Input.Search
           enterButton="Sign In"
           placeholder="Enter username"
+          value={me}
           onChange={(e) => {
-            setUserName(e.target.value)
+            setMe(e.target.value)
           }}
           onSearch={(msg) => {
             if(!msg){
@@ -24,7 +25,7 @@ export default ({ setUserName, displayStatus, setMe, setLogin }) => {
               })
               return;
             }
-            setMe(msg)
+            setUserName(msg)
             setLogin(true)
           }}
         ></Input.Search>
