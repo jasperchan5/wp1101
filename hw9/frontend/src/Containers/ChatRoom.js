@@ -55,6 +55,7 @@ export default ({ me, displayStatus }) => {
                             }
                         }}
                     >
+                        {/* {console.log(activeKey)} */}
                         {chatBoxes.map((friend) => 
                             <Tabs.TabPane tab = {friend} closable={true} key={friend}>
                                 <ChatBox me={me} friend={friend} key={friend}></ChatBox>
@@ -89,6 +90,7 @@ export default ({ me, displayStatus }) => {
                 
                 // When "Send", call sendMessage()
                 onSearch={(msg) => {
+                    // console.log(me,activeKey,msg);
                     if(!msg){
                         displayStatus({
                             type: 'error',

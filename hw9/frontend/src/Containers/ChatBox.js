@@ -53,7 +53,7 @@ const ChatBox = ({ me, friend, key }) => {
 
     if(loading) return <p>loading</p>;
 
-    console.log(data);
+    // console.log(data);
 
     return(
         <Messages>
