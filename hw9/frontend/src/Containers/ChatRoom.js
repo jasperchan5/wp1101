@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Input, Button, Tag, Tabs } from "antd";
 import { useMutation } from '@apollo/client';
 import { CREATE_CHATBOX_MUTATION, CREATE_MESSAGE_MUTATION } from "../graphql";
-import ChatBox from "./ChatBox";
-import ChatModal from "./ChatModal";
+import ChatBox from "./ChatBox.js";
+import ChatModal from "./ChatModal.js";
 import useChatBox from "../Hooks/useChatBox.js";
 import Title from "../Components/Title.js"
 import styled from "styled-components";
@@ -24,13 +24,13 @@ export default ({ me, displayStatus }) => {
     const [activeKey, setActiveKey] = useState('');
     const { chatBoxes, createChatBox, removeChatBox } = useChatBox();
     const [modalVisible, setModalVisible] = useState(false);
+    const [name,setName] = useState("");
 
     const [startChat] = useMutation(CREATE_CHATBOX_MUTATION);
     const [sendMessage] = useMutation(CREATE_MESSAGE_MUTATION);
 
-    const addChatBox = () => {
-        setModalVisible(true);
-    }
+    const addChatBox = () => setModalVisible(true);
+    
 
     return(
         <>
@@ -55,34 +55,35 @@ export default ({ me, displayStatus }) => {
                             }
                         }}
                     >
-                        {chatBoxes.map((friend) => {
+                        {chatBoxes.map((friend) => 
                             <Tabs.TabPane tab = {friend} closable={true} key={friend}>
                                 <ChatBox me={me} friend={friend} key={friend}></ChatBox>
                             </Tabs.TabPane>
-                        })}
+                        )}
                     </Wrapper>
                     <ChatModal
                     visible={modalVisible}
-                    onCreate={async({ name, friend }) => {
+                    onCreate={async () => {
+                        // console.log(name);
                         await startChat({
                             variables: {
                                 name1: me,
-                                name2: friend
+                                name2: name
                             },
                         })
-
+                        // console.log("Start chat success");
                         setActiveKey(createChatBox(name));
+                        // console.log("Create chatbox success");
                         setModalVisible(false);
                     }}
-                    onCancel={() => {
-                        setModalVisible(false);
-                    }}
+                    onCancel={() => setModalVisible(false)}
+                    setName={setName}
                 ></ChatModal>
                 </> 
                 <Input.Search
                 // Save and store the text body
                 value={messageInput}
-                onChange={(e) => {setMessageInput(e.target.value)}}
+                onChange={(e) => setMessageInput(e.target.value)}
                 enterButton="Send"
                 placeholder="Enter message here..."
                 

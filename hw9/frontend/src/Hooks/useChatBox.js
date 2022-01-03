@@ -7,8 +7,8 @@ const useChatBox = () => {
         if(chatBoxes.some((name) => name === friend)){
             throw new Error(friend + "'s chat box has already opened.");
         }
-
-        setChatBoxes([...chatBoxes,friend]);
+        setChatBoxes([...chatBoxes, friend]);
+        // console.log("friend:",friend);
         return friend;
     }
 

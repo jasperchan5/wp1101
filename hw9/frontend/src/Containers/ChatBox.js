@@ -11,9 +11,9 @@ const Messages = styled.div`
     overflow: auto;
 `;
 
-const ChatBox = ({ me, friend, ...props }) => {
+const ChatBox = ({ me, friend, key }) => {
     const messagesFooter = useRef(null);
-
+    // console.log("me:",me," friend:",friend);
     const { data, loading, subscribeToMore } = useQuery(CHATBOX_QUERY, {
         variables: {
             name1: me,
@@ -41,9 +41,9 @@ const ChatBox = ({ me, friend, ...props }) => {
                     console.log(prev);
 
                     return{
-                        ChatBox: {
-                            messages: [...prev.ChatBox.messages, newMessage],
-                        }
+                        chatBox: {
+                            messages: [...prev.chatBox.messages, newMessage],
+                        },
                     };
                 },
             });
@@ -53,11 +53,13 @@ const ChatBox = ({ me, friend, ...props }) => {
 
     if(loading) return <p>loading</p>;
 
+    console.log(data);
+
     return(
         <Messages>
-            {data.chatBox.messages.map(({ sender: { name }, body }, i) => (
-                <Message me={me} name={name} body={body} key={name+body+i}></Message>
-            ))}
+            {data.chatBox.messages.map(({ sender: { name }, body }, i) => 
+                 <Message me={me} name={name} body={body} key={name+body+i}/>
+             )}
             <div ref={messagesFooter}></div>
         </Messages>
     )
