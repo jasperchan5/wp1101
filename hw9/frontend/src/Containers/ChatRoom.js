@@ -36,9 +36,6 @@ export default ({ me, displayStatus }) => {
         <>
                 <Title>
                     <h1>{me}'s Chat Room</h1>
-                    {/* <Button type="primary" danger onClick={clearMessages}>
-                        Clear
-                    </Button> */}
                 </Title>
                 <>
                     <Wrapper
@@ -90,7 +87,7 @@ export default ({ me, displayStatus }) => {
                 
                 // When "Send", call sendMessage()
                 onSearch={(msg) => {
-                    // console.log(me,activeKey,msg);
+                    console.log("Print: ",me,activeKey,msg);
                     if(!msg){
                         displayStatus({
                             type: 'error',

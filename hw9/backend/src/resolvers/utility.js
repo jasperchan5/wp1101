@@ -41,10 +41,10 @@ const newChatBox = (db, chatBoxName) => {
 
 export { 
     makeName, 
+    checkUser, 
+    checkMessage, 
+    checkChatBox,
     newUser, 
     newMessage, 
     newChatBox, 
-    checkUser, 
-    checkMessage, 
-    checkChatBox
 }

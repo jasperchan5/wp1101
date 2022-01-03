@@ -3,6 +3,7 @@ import { makeName, newUser, newMessage, newChatBox, checkUser, checkMessage, che
 
 const Mutation = {
   async createMessage(parent, { from, to, message }, { db, pubsub }, info){
+    console.log("Enter");
     const { chatBox, sender } = await checkMessage(
       db,
       from,
@@ -14,6 +15,7 @@ const Mutation = {
     if(!sender) throw new Error("User not found: " + from);
 
     const chatBoxName = makeName(from, to);
+    console.log(chatBoxName);
     const newMsg = await newMessage(db, sender, message);
     chatBox.messages.push(newMsg);
     await chatBox.save();
