@@ -68,8 +68,11 @@ export const ADMINDATA_SUBSCRIPTION = gql`
 export const ALLMATCH_SUBSCRIPTION = gql`
     subscription allMatch {
         allMatch {
-            matchName
-            time
+            mutation
+            match {
+                matchName
+                time
+            }
         }
     }
 `
@@ -77,8 +80,11 @@ export const ALLMATCH_SUBSCRIPTION = gql`
 export const TEAMMATCH_SUBSCRIPTION = gql`
     subscription teamMatch($team: String!) {
         teamMatch(team: $team) {
-            matchName
-            time
+            mutation
+            match {
+                matchName
+                time
+            }
         }
     }
 `
