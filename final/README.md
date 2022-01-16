@@ -5,8 +5,11 @@
 Deploy連結:https://wp1101-final.herokuapp.com
  
 打開程式碼於最外層加入.env 加入MONGO_URL=及後方資料庫連結
-執行cmd : yarn -> yarn build -> yarn start
-於網頁輸入: localhost:80/graphql進入網頁
+執行cmd : 
+    yarn -> yarn build -> yarn start
+於網頁輸入: 
+    localhost:80/graphql
+進入網頁
  
 登入網頁使用步驟:
  
@@ -86,7 +89,7 @@ Deploy連結:https://wp1101-final.herokuapp.com
 
 ### 每位組員之負責項目
  
-詹景棠:前端設計,撰寫前後端連結,heroku deploy及資料庫設置
-吳和謙:流程設計,後端graphQL操作及前端功能優化
-周成康:使用者介面設計調整,書面報告,步驟除錯
+- 詹景棠:前端設計,撰寫前後端連結,heroku deploy及資料庫設置
+- 吳和謙:流程設計,後端graphQL操作及前端功能優化
+- 周成康:使用者介面設計調整,書面報告,步驟除錯
  
